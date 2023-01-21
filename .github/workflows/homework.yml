@@ -6,6 +6,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
 
       # Checkout the repository
       - name: Checkout the repository
@@ -21,6 +23,12 @@ jobs:
       - name: Install pytest
         run: |
           pip install pytest
+          pip install requests
       - name: Run tests
         run: |
           pytest -v --tb=no -q
+        continue-on-error: true
+      - name: Natijalar
+        run: |
+          CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }}) 
+          python test/sendtest.py ${{github.actor}} '${{github.repository}}' "$CHANGED_FILES"
