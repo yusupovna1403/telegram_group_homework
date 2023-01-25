@@ -16,7 +16,8 @@ def find_all_users_id(data: dict)->list:
             lst.append(user['actor_id'])
         else:
             lst.append(user['from_id'])
-    return lst
+    ans = set(lst)
+    return list(ans)
 
 
 data = read_data('data//result.json')
