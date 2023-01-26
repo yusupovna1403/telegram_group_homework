@@ -16,8 +16,9 @@ def find_all_users_id(data: dict)->list:
             if user['actor_id'] not in lst:
                 lst.append(user['actor_id'])
         else:
-            if user['from_id'] not in lst:
-                lst.append(user['from_id'])
+            if user['from_id'] != 'channel1640165484' and user['from_id'] != 'channel1474589327':
+                if user['from_id'] not in lst:
+                    lst.append(user['from_id'])
     
     return lst
 
